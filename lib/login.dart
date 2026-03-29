@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'register.dart';
+import 'add_dashboard.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -41,18 +42,13 @@ class _LoginScreenState extends State<LoginScreen> {
           setState(() {
             _isLoading = false;
           });
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                'Login successful! Email: ${_emailController.text}',
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (_) => DashboardScreen(
+                userName: _emailController.text.split('@').first,
               ),
-              duration: const Duration(seconds: 2),
             ),
           );
-          // Reset form
-          _formKey.currentState!.reset();
-          _emailController.clear();
-          _passwordController.clear();
         }
       });
     }
